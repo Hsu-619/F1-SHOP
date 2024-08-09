@@ -26,9 +26,11 @@ import { RouterLink, RouterView } from 'vue-router'
                         <a class="nav-link active hover" href="#">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
-                            <i class="bi bi-cart3"></i>
-                        </a>
+                        <RouterLink to="/pageone">
+                            <a class="nav-link active" href="#">
+                                <i class="bi bi-cart3"></i>
+                            </a>
+                        </RouterLink>
                     </li>
                     <li class="nav-item dropdown">
                         <button class="btn btn-primary-subtle" data-bs-toggle="dropdown">

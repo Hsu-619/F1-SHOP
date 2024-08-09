@@ -33,6 +33,7 @@ export default {
         sessionStorage.setItem('driver-time', JSON.stringify(this.money));
         },
     },
+    
 }
 </script>
 

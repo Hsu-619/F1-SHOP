@@ -21,8 +21,7 @@ import { RouterLink, RouterView } from 'vue-router'
                 </div>
                 <div class="left-login h-100 position-absolute">
                     <div class="d-flex justify-content-center align-items-center h-100">
-                        <form class="row g-3 d-flex justify-content-center align-items-center"
-                        action="./購物車pg-1.html">
+                        <form class="row g-3 d-flex justify-content-center align-items-center">
                             <div class="form-top col-9 d-flex flex-column align-items-center justify-content-center">
                                 <div class="Logo d-flex" href="">
                                     <img src="../assets/imges/F1 LOGO.jpg" alt="Logo" width="100" height="100"
@@ -64,8 +63,7 @@ import { RouterLink, RouterView } from 'vue-router'
             </div>
             <div class="right col-6 h-100">
                 <div class="d-flex justify-content-center align-items-center h-100">
-                    <form class="row g-3 needs-validation d-flex justify-content-center align-items-center"
-                    action="/pageone">
+                    <form class="row g-3 needs-validation d-flex justify-content-center align-items-center">
                         <div class="form-top col-9 d-flex flex-column align-items-center justify-content-center">
                             <div class="Logo d-flex" href="">
                                 <img src="../assets/imges/F1 LOGO.jpg" alt="Logo" width="100" height="100"
@@ -95,9 +93,11 @@ import { RouterLink, RouterView } from 'vue-router'
                             <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
                             <label for="floatingPassword">Password</label>
                         </div>
-                        <div class="submit d-flex justify-content-center">
-                            <button class="btn btn-primary w-75" type="submit">送出</button>
-                        </div>
+                        <RouterLink to="/pageone">
+                            <div class="submit d-flex justify-content-center">
+                                <button class="btn btn-primary w-75" type="submit">送出</button>
+                            </div>
+                        </RouterLink>
                     </form>
                 </div>
             </div>
