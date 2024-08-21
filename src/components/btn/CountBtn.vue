@@ -1,4 +1,4 @@
-<!-- 數量按鈕組件 -->
+    <!-- 數量按鈕組件 -->
 
 <script>
 export default {

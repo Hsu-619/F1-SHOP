@@ -1,36 +1,22 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router';
-import CountBtn from '@/components/btn/CountBtn.vue';
-import { totalPrice } from '@/composable/useCount';
-import { totalQuantity } from '@/composable/useQuantity';
-
-import Leclerc from '@/assets/imges/leclerc.jpg';
-import Hamilton from '@/assets/imges/hamilton.jpg'
-import Verstappen from '@/assets/imges/verstappen.jpg'
+import { useShopCartStore } from '@/stores/shopcart';
 
 export default {
-    components: {
-        CountBtn,
-    },
+
     setup() {
-        return { totalPrice , totalQuantity };
-    },
-    data() {
-        return {
-            money: [
-                {id: 1, fristname: 'Charles', lastname: 'Leclerc', number:16 ,price: 6000,
-                quantity: 0, img: Leclerc},
-                {id: 2, fristname: 'Lewis', lastname: 'Hamilton', number:44 ,price: 9000,
-                quantity: 0, img: Hamilton},
-                {id: 3, fristname: 'Max', lastname: 'Verstappen', number:1 ,price: 7500,
-                quantity: 0, img: Verstappen },
-            ]
-        };
+        const shopCart = useShopCartStore();
+
+        function decrement(item) {
+            if (item.quantity > 0) {
+                item.quantity--;
+            }
+        }
+        return { shopCart, decrement };
     },
     methods: {
-    // 將車手錢存在Storage裡
-    setStorage() {
-        sessionStorage.setItem('driver-time', JSON.stringify(this.money));
+        setData() {
+            this.$router.push('/pagetwo');
         },
     },
     
@@ -87,7 +73,7 @@ export default {
             <div class="list-box px-5">
                 <div class="list fs-2 mb-2 border-top border-primary border-3 py-3">訂單明細</div>
             </div>
-            <div v-for="item in money" :key="item.id">
+            <div v-for="item in shopCart.cartData?.product ?? []" :key="item.id">
                 <div class="item-box1">
                     <div class="navbar-brand d-flex py-3 justify-content-between border-bottom border-primary border-3">
                         <div class="left-box d-flex">
@@ -102,7 +88,11 @@ export default {
                             </div>
                         </div>
                         <div class="right-box d-flex align-items-center">
-                            <CountBtn class=" me-2" @send="(count) => item.quantity = count"></CountBtn>
+                            <div class="box col me-3 d-flex justify-content-end">
+                            <button type="button" class="btn" @click="decrement(item)">-</button>
+                            <input v-model="item.quantity" type="number" id="num" class="text-center"></input>
+                            <button type="button" class="btn" @click="item.quantity++">+</button>
+                            </div>
                             <div class="money fs-5">${{ item.price }}</div>
                         </div>
                     </div>
@@ -117,10 +107,10 @@ export default {
                         <span>總計:</span>
                     </div>
                     <div class="total-Money ps-5 ms-5 d-flex flex-column">
-                        <span class="d-flex justify-content-end">{{ totalQuantity(money) }}</span>
-                        <span class="d-flex justify-content-end">${{ totalPrice(money) }}</span>
+                        <span class="d-flex justify-content-end">{{ shopCart.cartData.product.length }}</span>
+                        <span class="d-flex justify-content-end">${{ shopCart.totalPrice }}</span>
                         <span class="d-flex justify-content-end">$1000</span>
-                        <span class="d-flex justify-content-end">${{ totalPrice(money) + 1000 }}</span>
+                        <span class="d-flex justify-content-end">${{ shopCart.totalPrice + 1000 }}</span>
                     </div>
                 </div>
             </div>
@@ -132,7 +122,7 @@ export default {
                     </button>
                 </RouterLink>
                 <RouterLink to="/pagetwo">
-                    <button type="button" class="btn btn-primary" @click="setStorage">
+                    <button type="button" class="btn btn-primary" @click="">
                         下一步
                     </button>
                 </RouterLink>
@@ -224,5 +214,8 @@ ul {
     .item-box1 {
         padding: 0px;
     }
+}
+.text-center{
+    width: 2.5rem;
 }
 </style>

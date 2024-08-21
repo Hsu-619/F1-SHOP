@@ -10,6 +10,11 @@ import PageFourView from '@/views/PageFourView.vue'
 const title = 'F1-Shop';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  scrollBehavior() {
+    return {
+      top: 0,
+    };
+  },
   routes: [
     {
       path: '/',
